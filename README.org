@@ -1,9 +1,12 @@
 * Katex API
 
+A KaTeX string format converting server.
+
+https://katex.org/
 
 ** Usage
 
-docker cli
+Start the API server.
 #+BEGIN_SRC sh
   docker run --rm -p 3000:3000 chanmo/katex
 #+END_SRC
@@ -13,7 +16,9 @@ docker cli
 
 *** Tex2Html
 
-httpie
+Convert the KaTeX string to HTML string.
+
+Use httpie.
 #+BEGIN_SRC bash
   http POST :3000/tex2html tex="x^2" --ignore-stdin 
 #+END_SRC
@@ -23,7 +28,9 @@ httpie
 
 *** Tex2Mathml
 
-httpie
+Convert the KaTeX string to MathML string.
+
+Use httpie.
 #+BEGIN_SRC bash
   http POST :3000/tex2mathml tex="x^2" --ignore-stdin
 #+END_SRC
