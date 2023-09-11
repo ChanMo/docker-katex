@@ -16,16 +16,21 @@ const HOST = '0.0.0.0'
 
 
 app.get('/', (req, res) => {
-  res.send('Hello')
+  res.send('Welcome to chanmo/katex')
 })
 
 app.post('/tex2mathml', (req, res) => {
   if(!req.body.tex) {
     throw new Error('TEX IS MISSING')
   }
+  const displayMode = req.query.display_mode === "true"
   const content = req.body.tex
   console.log('content', content)
-  const html = katex.renderToString(content, {throwOnError:false,displayMode:true,fleqn:true})
+  const html = katex.renderToString(content, {
+    throwOnError:false,
+    displayMode:displayMode,
+    fleqn:true
+  })
   const match = html.match('<math.*><\/math>')
   if(match) {
     return res.send(match[0])
@@ -38,7 +43,12 @@ app.post('/tex2html', (req, res) => {
     throw new Error('TEX IS MISSING')
   }
   const content = req.body.tex
-  const html = katex.renderToString(content, {throwOnError:false,displayMode:true,fleqn:true})
+  const displayMode = req.query.display_mode === "true"
+  const html = katex.renderToString(content, {
+    throwOnError:false,
+    displayMode:displayMode,
+    fleqn:true
+  })
   return res.send(html)
 })
 
